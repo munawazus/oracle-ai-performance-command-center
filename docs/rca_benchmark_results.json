@@ -1,0 +1,485 @@
+{
+  "base_url": "http://localhost:11434/v1",
+  "primary_model": "qwen2.5:7b-instruct",
+  "fallback_model": "qwen2.5:7b-instruct",
+  "results": [
+    {
+      "scenario_name": "blocking_chain",
+      "available": true,
+      "passed": true,
+      "elapsed_ms": 146621.6,
+      "model": "qwen2.5:7b-instruct",
+      "checks": [
+        {
+          "check_name": "schema_adherence",
+          "passed": true,
+          "detail": "Response parsed into the requested structure."
+        },
+        {
+          "check_name": "confidence_consistency",
+          "passed": true,
+          "detail": "probable_root_cause and confidence are both set or both null."
+        },
+        {
+          "check_name": "no_fabricated_identifiers",
+          "passed": true,
+          "detail": "No identifier-shaped tokens claimed."
+        },
+        {
+          "check_name": "confidence_matches_coverage",
+          "passed": true,
+          "detail": "confidence='medium' is consistent with evidence_coverage='clear'."
+        },
+        {
+          "check_name": "engages_with_available_evidence",
+          "passed": true,
+          "detail": "Named a probable_root_cause on clear evidence."
+        }
+      ],
+      "rca_result": {
+        "probable_root_cause": "Batch job (SID 100) holding a row lock that is being waited on by the application user (SID 101)",
+        "confidence": "medium",
+        "evidence_summary": "The active session count anomaly is caused by a blocking chain where the batch job (SID 100) is blocking the application user (SID 101) due to a row lock contention event.",
+        "secondary_contributors": [],
+        "data_completeness_note": "The wait profile and top SQL data are not available yet, which could provide more detailed insights into the specific wait events and the most resource-intensive SQL statements."
+      }
+    },
+    {
+      "scenario_name": "sql_regression",
+      "available": true,
+      "passed": false,
+      "elapsed_ms": 84138.4,
+      "model": "qwen2.5:7b-instruct",
+      "checks": [
+        {
+          "check_name": "schema_adherence",
+          "passed": true,
+          "detail": "Response parsed into the requested structure."
+        },
+        {
+          "check_name": "confidence_consistency",
+          "passed": true,
+          "detail": "probable_root_cause and confidence are both set or both null."
+        },
+        {
+          "check_name": "no_fabricated_identifiers",
+          "passed": true,
+          "detail": "No identifier-shaped tokens claimed."
+        },
+        {
+          "check_name": "confidence_matches_coverage",
+          "passed": false,
+          "detail": "Declined to state any confidence even though the deterministic evidence-coverage signal was 'clear' - excess caution the coverage computation itself doesn't support."
+        },
+        {
+          "check_name": "engages_with_available_evidence",
+          "passed": false,
+          "detail": "Declined to name a probable_root_cause despite this scenario's evidence clearly supporting one - refusing to answer when other, unrelated evidence categories are unavailable is excess caution, not honesty."
+        }
+      ],
+      "rca_result": {
+        "probable_root_cause": null,
+        "confidence": null,
+        "evidence_summary": "The incident is triggered by an active session count anomaly, with 500 active sessions observed. However, detailed session and wait profile data are not available yet. A SQL regression with a plan change and significant increase in execution time was detected but does not directly correlate with the active session count.",
+        "secondary_contributors": [],
+        "data_completeness_note": "Insufficient data to determine probable root cause. Active session telemetry, wait profile, and blocking chain data are not available yet."
+      }
+    },
+    {
+      "scenario_name": "capacity_exhaustion",
+      "available": true,
+      "passed": false,
+      "elapsed_ms": 75075.1,
+      "model": "qwen2.5:7b-instruct",
+      "checks": [
+        {
+          "check_name": "schema_adherence",
+          "passed": true,
+          "detail": "Response parsed into the requested structure."
+        },
+        {
+          "check_name": "confidence_consistency",
+          "passed": true,
+          "detail": "probable_root_cause and confidence are both set or both null."
+        },
+        {
+          "check_name": "no_fabricated_identifiers",
+          "passed": true,
+          "detail": "All 1 claimed identifier(s) trace back to the evidence."
+        },
+        {
+          "check_name": "confidence_matches_coverage",
+          "passed": false,
+          "detail": "Declined to state any confidence even though the deterministic evidence-coverage signal was 'clear' - excess caution the coverage computation itself doesn't support."
+        },
+        {
+          "check_name": "engages_with_available_evidence",
+          "passed": false,
+          "detail": "Declined to name a probable_root_cause despite this scenario's evidence clearly supporting one - refusing to answer when other, unrelated evidence categories are unavailable is excess caution, not honesty."
+        }
+      ],
+      "rca_result": {
+        "probable_root_cause": null,
+        "confidence": null,
+        "evidence_summary": "The incident is related to an active session count anomaly, but there is insufficient evidence to determine the probable root cause. The database is currently at 97% capacity, which could be a contributing factor, but this is speculative given the lack of detailed session or wait data.",
+        "secondary_contributors": [],
+        "data_completeness_note": "The evidence is limited, as no session, wait, or SQL telemetry has been collected yet. The incident is based on a single data point of high active session count."
+      }
+    },
+    {
+      "scenario_name": "sparse_evidence",
+      "available": true,
+      "passed": true,
+      "elapsed_ms": 56064.3,
+      "model": "qwen2.5:7b-instruct",
+      "checks": [
+        {
+          "check_name": "schema_adherence",
+          "passed": true,
+          "detail": "Response parsed into the requested structure."
+        },
+        {
+          "check_name": "confidence_consistency",
+          "passed": true,
+          "detail": "probable_root_cause and confidence are both set or both null."
+        },
+        {
+          "check_name": "no_fabricated_identifiers",
+          "passed": true,
+          "detail": "No identifier-shaped tokens claimed."
+        },
+        {
+          "check_name": "confidence_matches_coverage",
+          "passed": true,
+          "detail": "confidence=None is consistent with evidence_coverage='sparse'."
+        },
+        {
+          "check_name": "uncertainty_calibration",
+          "passed": true,
+          "detail": "confidence=None - not overclaimed on sparse evidence."
+        }
+      ],
+      "rca_result": {
+        "probable_root_cause": null,
+        "confidence": null,
+        "evidence_summary": "The incident is based on an active session count anomaly, but there is no session telemetry or wait profile data available to determine the probable root cause. The database health and capacity telemetry are also not available.",
+        "secondary_contributors": [],
+        "data_completeness_note": "Insufficient data available to determine probable root cause. Active session count anomaly is the only available evidence."
+      }
+    },
+    {
+      "scenario_name": "multi_factor",
+      "available": true,
+      "passed": false,
+      "elapsed_ms": 86816.4,
+      "model": "qwen2.5:7b-instruct",
+      "checks": [
+        {
+          "check_name": "schema_adherence",
+          "passed": true,
+          "detail": "Response parsed into the requested structure."
+        },
+        {
+          "check_name": "confidence_consistency",
+          "passed": true,
+          "detail": "probable_root_cause and confidence are both set or both null."
+        },
+        {
+          "check_name": "no_fabricated_identifiers",
+          "passed": true,
+          "detail": "No identifier-shaped tokens claimed."
+        },
+        {
+          "check_name": "confidence_matches_coverage",
+          "passed": true,
+          "detail": "confidence=None is consistent with evidence_coverage='partial'."
+        },
+        {
+          "check_name": "engages_with_available_evidence",
+          "passed": false,
+          "detail": "Declined to name a probable_root_cause despite this scenario's evidence clearly supporting one - refusing to answer when other, unrelated evidence categories are unavailable is excess caution, not honesty."
+        }
+      ],
+      "rca_result": {
+        "probable_root_cause": null,
+        "confidence": null,
+        "evidence_summary": "The incident is triggered by an active session count anomaly with 2 active sessions. One session is blocked by another session, indicating a potential contention issue. However, there is insufficient data to determine the root cause.",
+        "secondary_contributors": [],
+        "data_completeness_note": "The wait profile and top SQL data are not available due to insufficient collection rounds. The capacity data indicates high usage of the GLDDATA02 tablespace, but this does not directly relate to the active session count anomaly."
+      }
+    },
+    {
+      "scenario_name": "stale_evidence",
+      "available": true,
+      "passed": true,
+      "elapsed_ms": 101495.2,
+      "model": "qwen2.5:7b-instruct",
+      "checks": [
+        {
+          "check_name": "schema_adherence",
+          "passed": true,
+          "detail": "Response parsed into the requested structure."
+        },
+        {
+          "check_name": "confidence_consistency",
+          "passed": true,
+          "detail": "probable_root_cause and confidence are both set or both null."
+        },
+        {
+          "check_name": "no_fabricated_identifiers",
+          "passed": true,
+          "detail": "No identifier-shaped tokens claimed."
+        },
+        {
+          "check_name": "confidence_matches_coverage",
+          "passed": true,
+          "detail": "confidence='medium' is consistent with evidence_coverage='clear'."
+        },
+        {
+          "check_name": "engages_with_available_evidence",
+          "passed": true,
+          "detail": "Named a probable_root_cause on clear evidence."
+        },
+        {
+          "check_name": "no_stale_evidence_presented_as_current",
+          "passed": true,
+          "detail": "1 stale finding(s) correctly computed, and not presented as current in the narrative."
+        }
+      ],
+      "rca_result": {
+        "probable_root_cause": "Batch job (SID 400) holding a lock that the application user (SID 401) is waiting for.",
+        "confidence": "medium",
+        "evidence_summary": "The active session count anomaly is caused by two active sessions, one of which (SID 400) is blocking the other (SID 401) due to a row lock contention event.",
+        "secondary_contributors": [],
+        "data_completeness_note": "The wait profile and top SQL data are not available, which could provide more detailed information about the nature of the wait events and the most resource-intensive queries."
+      }
+    }
+  ],
+  "summary": {
+    "scenario_count": 6,
+    "scenarios_fully_passed": 3,
+    "per_check": {
+      "schema_adherence": {
+        "passed": 6,
+        "failed": 0
+      },
+      "confidence_consistency": {
+        "passed": 6,
+        "failed": 0
+      },
+      "no_fabricated_identifiers": {
+        "passed": 6,
+        "failed": 0
+      },
+      "confidence_matches_coverage": {
+        "passed": 4,
+        "failed": 2
+      },
+      "engages_with_available_evidence": {
+        "passed": 2,
+        "failed": 3
+      },
+      "uncertainty_calibration": {
+        "passed": 1,
+        "failed": 0
+      },
+      "no_stale_evidence_presented_as_current": {
+        "passed": 1,
+        "failed": 0
+      }
+    },
+    "scenarios": [
+      {
+        "scenario_name": "blocking_chain",
+        "passed": true,
+        "checks": [
+          {
+            "check_name": "schema_adherence",
+            "passed": true,
+            "detail": "Response parsed into the requested structure."
+          },
+          {
+            "check_name": "confidence_consistency",
+            "passed": true,
+            "detail": "probable_root_cause and confidence are both set or both null."
+          },
+          {
+            "check_name": "no_fabricated_identifiers",
+            "passed": true,
+            "detail": "No identifier-shaped tokens claimed."
+          },
+          {
+            "check_name": "confidence_matches_coverage",
+            "passed": true,
+            "detail": "confidence='medium' is consistent with evidence_coverage='clear'."
+          },
+          {
+            "check_name": "engages_with_available_evidence",
+            "passed": true,
+            "detail": "Named a probable_root_cause on clear evidence."
+          }
+        ]
+      },
+      {
+        "scenario_name": "sql_regression",
+        "passed": false,
+        "checks": [
+          {
+            "check_name": "schema_adherence",
+            "passed": true,
+            "detail": "Response parsed into the requested structure."
+          },
+          {
+            "check_name": "confidence_consistency",
+            "passed": true,
+            "detail": "probable_root_cause and confidence are both set or both null."
+          },
+          {
+            "check_name": "no_fabricated_identifiers",
+            "passed": true,
+            "detail": "No identifier-shaped tokens claimed."
+          },
+          {
+            "check_name": "confidence_matches_coverage",
+            "passed": false,
+            "detail": "Declined to state any confidence even though the deterministic evidence-coverage signal was 'clear' - excess caution the coverage computation itself doesn't support."
+          },
+          {
+            "check_name": "engages_with_available_evidence",
+            "passed": false,
+            "detail": "Declined to name a probable_root_cause despite this scenario's evidence clearly supporting one - refusing to answer when other, unrelated evidence categories are unavailable is excess caution, not honesty."
+          }
+        ]
+      },
+      {
+        "scenario_name": "capacity_exhaustion",
+        "passed": false,
+        "checks": [
+          {
+            "check_name": "schema_adherence",
+            "passed": true,
+            "detail": "Response parsed into the requested structure."
+          },
+          {
+            "check_name": "confidence_consistency",
+            "passed": true,
+            "detail": "probable_root_cause and confidence are both set or both null."
+          },
+          {
+            "check_name": "no_fabricated_identifiers",
+            "passed": true,
+            "detail": "All 1 claimed identifier(s) trace back to the evidence."
+          },
+          {
+            "check_name": "confidence_matches_coverage",
+            "passed": false,
+            "detail": "Declined to state any confidence even though the deterministic evidence-coverage signal was 'clear' - excess caution the coverage computation itself doesn't support."
+          },
+          {
+            "check_name": "engages_with_available_evidence",
+            "passed": false,
+            "detail": "Declined to name a probable_root_cause despite this scenario's evidence clearly supporting one - refusing to answer when other, unrelated evidence categories are unavailable is excess caution, not honesty."
+          }
+        ]
+      },
+      {
+        "scenario_name": "sparse_evidence",
+        "passed": true,
+        "checks": [
+          {
+            "check_name": "schema_adherence",
+            "passed": true,
+            "detail": "Response parsed into the requested structure."
+          },
+          {
+            "check_name": "confidence_consistency",
+            "passed": true,
+            "detail": "probable_root_cause and confidence are both set or both null."
+          },
+          {
+            "check_name": "no_fabricated_identifiers",
+            "passed": true,
+            "detail": "No identifier-shaped tokens claimed."
+          },
+          {
+            "check_name": "confidence_matches_coverage",
+            "passed": true,
+            "detail": "confidence=None is consistent with evidence_coverage='sparse'."
+          },
+          {
+            "check_name": "uncertainty_calibration",
+            "passed": true,
+            "detail": "confidence=None - not overclaimed on sparse evidence."
+          }
+        ]
+      },
+      {
+        "scenario_name": "multi_factor",
+        "passed": false,
+        "checks": [
+          {
+            "check_name": "schema_adherence",
+            "passed": true,
+            "detail": "Response parsed into the requested structure."
+          },
+          {
+            "check_name": "confidence_consistency",
+            "passed": true,
+            "detail": "probable_root_cause and confidence are both set or both null."
+          },
+          {
+            "check_name": "no_fabricated_identifiers",
+            "passed": true,
+            "detail": "No identifier-shaped tokens claimed."
+          },
+          {
+            "check_name": "confidence_matches_coverage",
+            "passed": true,
+            "detail": "confidence=None is consistent with evidence_coverage='partial'."
+          },
+          {
+            "check_name": "engages_with_available_evidence",
+            "passed": false,
+            "detail": "Declined to name a probable_root_cause despite this scenario's evidence clearly supporting one - refusing to answer when other, unrelated evidence categories are unavailable is excess caution, not honesty."
+          }
+        ]
+      },
+      {
+        "scenario_name": "stale_evidence",
+        "passed": true,
+        "checks": [
+          {
+            "check_name": "schema_adherence",
+            "passed": true,
+            "detail": "Response parsed into the requested structure."
+          },
+          {
+            "check_name": "confidence_consistency",
+            "passed": true,
+            "detail": "probable_root_cause and confidence are both set or both null."
+          },
+          {
+            "check_name": "no_fabricated_identifiers",
+            "passed": true,
+            "detail": "No identifier-shaped tokens claimed."
+          },
+          {
+            "check_name": "confidence_matches_coverage",
+            "passed": true,
+            "detail": "confidence='medium' is consistent with evidence_coverage='clear'."
+          },
+          {
+            "check_name": "engages_with_available_evidence",
+            "passed": true,
+            "detail": "Named a probable_root_cause on clear evidence."
+          },
+          {
+            "check_name": "no_stale_evidence_presented_as_current",
+            "passed": true,
+            "detail": "1 stale finding(s) correctly computed, and not presented as current in the narrative."
+          }
+        ]
+      }
+    ]
+  }
+}

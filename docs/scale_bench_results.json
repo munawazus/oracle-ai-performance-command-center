@@ -1,0 +1,191 @@
+{
+  "fleet_scenarios": [
+    {
+      "fleet_size": 10,
+      "collection_rounds_seeded": 20,
+      "total_session_wait_health_rows_approx": 200,
+      "collector": {
+        "label": "collector.run_once_for_database (fleet=10)",
+        "n": 200,
+        "min_ms": 3.26,
+        "p50_ms": 5.0,
+        "p95_ms": 6.47,
+        "max_ms": 7.52,
+        "mean_ms": 5.07
+      },
+      "analytics": {
+        "label": "analytics.run_once_for_database (fleet=10)",
+        "n": 200,
+        "min_ms": 3.12,
+        "p50_ms": 5.01,
+        "p95_ms": 6.32,
+        "max_ms": 7.09,
+        "mean_ms": 5.07
+      },
+      "api_reads": {
+        "fleet_size": 10,
+        "returned_by_list_databases": 10,
+        "truncated_by_200_row_page_cap": false,
+        "list_databases": {
+          "label": "GET /api/databases (fleet=10)",
+          "n": 20,
+          "min_ms": 16.01,
+          "p50_ms": 19.02,
+          "p95_ms": 50.75,
+          "max_ms": 109.59,
+          "mean_ms": 24.99
+        },
+        "list_incidents": {
+          "label": "GET /api/incidents (fleet=10)",
+          "n": 20,
+          "min_ms": 15.05,
+          "p50_ms": 18.83,
+          "p95_ms": 22.92,
+          "max_ms": 39.97,
+          "mean_ms": 19.65
+        }
+      },
+      "sqlite_file_bytes_after_seeding": 393216,
+      "sqlite_bytes_per_database": 39321.6
+    },
+    {
+      "fleet_size": 50,
+      "collection_rounds_seeded": 8,
+      "total_session_wait_health_rows_approx": 400,
+      "collector": {
+        "label": "collector.run_once_for_database (fleet=50)",
+        "n": 400,
+        "min_ms": 2.88,
+        "p50_ms": 4.53,
+        "p95_ms": 5.92,
+        "max_ms": 8.54,
+        "mean_ms": 4.62
+      },
+      "analytics": {
+        "label": "analytics.run_once_for_database (fleet=50)",
+        "n": 400,
+        "min_ms": 2.73,
+        "p50_ms": 4.56,
+        "p95_ms": 5.85,
+        "max_ms": 7.4,
+        "mean_ms": 4.6
+      },
+      "api_reads": {
+        "fleet_size": 50,
+        "returned_by_list_databases": 50,
+        "truncated_by_200_row_page_cap": false,
+        "list_databases": {
+          "label": "GET /api/databases (fleet=50)",
+          "n": 20,
+          "min_ms": 13.65,
+          "p50_ms": 16.15,
+          "p95_ms": 19.38,
+          "max_ms": 21.8,
+          "mean_ms": 16.61
+        },
+        "list_incidents": {
+          "label": "GET /api/incidents (fleet=50)",
+          "n": 20,
+          "min_ms": 14.15,
+          "p50_ms": 15.39,
+          "p95_ms": 16.69,
+          "max_ms": 16.79,
+          "mean_ms": 15.4
+        }
+      },
+      "sqlite_file_bytes_after_seeding": 405504,
+      "sqlite_bytes_per_database": 8110.1
+    },
+    {
+      "fleet_size": 100,
+      "collection_rounds_seeded": 4,
+      "total_session_wait_health_rows_approx": 400,
+      "collector": {
+        "label": "collector.run_once_for_database (fleet=100)",
+        "n": 400,
+        "min_ms": 3.04,
+        "p50_ms": 4.55,
+        "p95_ms": 6.09,
+        "max_ms": 7.86,
+        "mean_ms": 4.68
+      },
+      "analytics": {
+        "label": "analytics.run_once_for_database (fleet=100)",
+        "n": 400,
+        "min_ms": 3.26,
+        "p50_ms": 4.52,
+        "p95_ms": 6.08,
+        "max_ms": 7.49,
+        "mean_ms": 4.65
+      },
+      "api_reads": {
+        "fleet_size": 100,
+        "returned_by_list_databases": 100,
+        "truncated_by_200_row_page_cap": false,
+        "list_databases": {
+          "label": "GET /api/databases (fleet=100)",
+          "n": 20,
+          "min_ms": 14.82,
+          "p50_ms": 18.47,
+          "p95_ms": 21.19,
+          "max_ms": 23.44,
+          "mean_ms": 18.45
+        },
+        "list_incidents": {
+          "label": "GET /api/incidents (fleet=100)",
+          "n": 20,
+          "min_ms": 12.92,
+          "p50_ms": 15.78,
+          "p95_ms": 17.86,
+          "max_ms": 18.56,
+          "mean_ms": 15.86
+        }
+      },
+      "sqlite_file_bytes_after_seeding": 421888,
+      "sqlite_bytes_per_database": 4218.9
+    }
+  ],
+  "queue": {
+    "backlog_size": 500,
+    "batch_size_per_tick": 50,
+    "ticks_to_drain": 10,
+    "expected_ticks": 10,
+    "items_drained": 500,
+    "total_seconds": 1.356,
+    "items_per_second": 368.8
+  },
+  "ai_concurrency": [
+    {
+      "concurrency": 1,
+      "total_seconds": 0.19,
+      "serial_lower_bound_seconds": 0.15,
+      "concurrency_speedup_factor": 0.79,
+      "answers_returned": 1,
+      "all_answers_non_empty": true
+    },
+    {
+      "concurrency": 10,
+      "total_seconds": 0.483,
+      "serial_lower_bound_seconds": 1.5,
+      "concurrency_speedup_factor": 3.1,
+      "answers_returned": 10,
+      "all_answers_non_empty": true
+    },
+    {
+      "concurrency": 25,
+      "total_seconds": 0.964,
+      "serial_lower_bound_seconds": 3.75,
+      "concurrency_speedup_factor": 3.89,
+      "answers_returned": 25,
+      "all_answers_non_empty": true
+    },
+    {
+      "concurrency": 50,
+      "total_seconds": 1.501,
+      "serial_lower_bound_seconds": 7.5,
+      "concurrency_speedup_factor": 5.0,
+      "answers_returned": 50,
+      "all_answers_non_empty": true
+    }
+  ]
+}
